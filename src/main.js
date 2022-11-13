@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 import App from "./App.vue";
 import router from "./router";
@@ -9,11 +10,23 @@ import { darkModeKey, styleKey } from "@/config.js";
 
 import "./css/main.css";
 
+import { createI18n } from "vue-i18n"
+import { languages } from './lang/index.js'
+import { defaultLocale } from './lang/index.js'
 /* Init Pinia */
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate)
+
+const messages = Object.assign(languages)
+
+const i18n = createI18n({
+  locale: defaultLocale,
+  messages,
+})
+
 
 /* Create Vue app */
-createApp(App).use(router).use(pinia).mount("#app");
+const app = createApp(App).use(router).use(pinia).use(i18n).mount("#app");
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);
@@ -36,7 +49,7 @@ if (
 }
 
 /* Default title tag */
-const defaultDocumentTitle = "Admin One Vue 3 Tailwind";
+const defaultDocumentTitle = "Rowmate";
 
 /* Set document title from route meta */
 router.afterEach((to) => {

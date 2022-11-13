@@ -3,10 +3,13 @@ import axios from "axios";
 
 export const useMainStore = defineStore("main", {
   state: () => ({
+    api: "http://127.0.0.1:8000",
+    access_token: null,
     /* User */
-    userName: null,
-    userEmail: null,
-    userAvatar: null,
+    user: {
+      firstname: "Loading",
+      avatar: {}
+    },
 
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
@@ -17,17 +20,15 @@ export const useMainStore = defineStore("main", {
   }),
   actions: {
     setUser(payload) {
-      if (payload.name) {
-        this.userName = payload.name;
-      }
-      if (payload.email) {
-        this.userEmail = payload.email;
-      }
-      if (payload.avatar) {
-        this.userAvatar = payload.avatar;
+      if (payload) {
+        this.user = payload;
       }
     },
-
+    setAccessToken(token) {
+      if (token) {
+        this.access_token = token;
+      }
+    },
     fetch(sampleDataKey) {
       axios
         .get(`data-sources/${sampleDataKey}.json`)
@@ -40,5 +41,5 @@ export const useMainStore = defineStore("main", {
           alert(error.message);
         });
     },
-  },
+  }, persist: true
 });

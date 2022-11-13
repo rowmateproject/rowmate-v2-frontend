@@ -1,8 +1,7 @@
 <script setup>
 import { reactive } from "vue";
-import { useMainStore } from "@/stores/main";
 import { useRouter } from "vue-router";
-import { mdiAccount, mdiAsterisk, mdiAxisLock } from "@mdi/js";
+import { mdiAccount, mdiAsterisk } from "@mdi/js";
 import SectionFullScreen from "@/components/SectionFullScreen.vue";
 import CardBox from "@/components/CardBox.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
@@ -11,34 +10,17 @@ import FormControl from "@/components/FormControl.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseButtons from "@/components/BaseButtons.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
-import axios from "axios";
-
-const mainStore = useMainStore();
 
 const form = reactive({
-  login: "",
-  pass: "",
+  login: "john.doe",
+  pass: "highly-secure-password-fYjUw-",
   remember: true,
 });
 
 const router = useRouter();
 
 const submit = () => {
-  var loginData = new FormData();
-  loginData.append("username", form.login)
-  loginData.append("password", form.pass)
-
-  axios.post(`${mainStore.api}/auth/jwt/login`, loginData).then(res => {
-    console.log(res)
-    mainStore.setAccessToken(res.data.access_token);
-    axios.defaults.baseURL = mainStore.api;
-    axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.access_token;
-    axios.get(`/users/me`).then(user => {
-      mainStore.setUser(user.data)
-    })
-    router.push("/dashboard");
-  })
-
+  router.push("/dashboard");
 };
 </script>
 
@@ -46,7 +28,7 @@ const submit = () => {
   <LayoutGuest>
     <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
       <CardBox :class="cardClass" is-form @submit.prevent="submit">
-        <FormField label="E-Mail" help="Please enter your E-Mail-Address">
+        <FormField label="Register" help="Please enter your login">
           <FormControl v-model="form.login" :icon="mdiAccount" name="login" autocomplete="username" />
         </FormField>
 

@@ -10,21 +10,28 @@ import {
 const props = defineProps({
   bg: {
     type: String,
-    required: true,
+    default: "purplePink",
     validator: (value) => ["purplePink", "pinkRed"].includes(value),
   },
+  bgimage: {
+    type: Boolean,
+    default: true
+  }
 });
 
-const colorClass = computed(() => {
-  if (useStyleStore().darkMode) {
-    return gradientBgDark;
-  }
-
-  switch (props.bg) {
-    case "purplePink":
-      return gradientBgPurplePink;
-    case "pinkRed":
-      return gradientBgPinkRed;
+const bgClass = computed(() => {
+  if (props.bgimage) {
+    return "bg-[url('/img/backgrounds/1.jpg')]"
+  } else {
+    if (useStyleStore().darkMode) {
+      return gradientBgDark;
+    }
+    switch (props.bg) {
+      case "purplePink":
+        return gradientBgPurplePink;
+      case "pinkRed":
+        return gradientBgPinkRed;
+    }
   }
 
   return "";
@@ -32,10 +39,7 @@ const colorClass = computed(() => {
 </script>
 
 <template>
-  <div
-    class="flex min-h-screen items-center justify-center"
-    :class="colorClass"
-  >
+  <div class="flex min-h-screen items-center justify-center" :class="bgClass" style="background-size: cover;">
     <slot card-class="w-11/12 md:w-7/12 lg:w-6/12 xl:w-4/12 shadow-2xl" />
   </div>
 </template>

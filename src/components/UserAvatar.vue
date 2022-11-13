@@ -1,40 +1,25 @@
 <script setup>
 import { computed } from "vue";
+import Avataaars from 'vuejs-avataaars/src/Avataaars.vue'
 
-const props = defineProps({
-  username: {
-    type: String,
-    required: true,
-  },
+const p = defineProps({
   avatar: {
-    type: String,
-    default: null,
-  },
-  api: {
-    type: String,
-    default: "avataaars",
-  },
+    type: Object,
+    default: { avatar: {} },
+  }
 });
 
-const avatar = computed(
-  () =>
-    props.avatar ??
-    `https://avatars.dicebear.com/api/${props.api}/${props.username.replace(
-      /[^a-z0-9]+/i,
-      "-"
-    )}.svg`
-);
-
-const username = computed(() => props.username);
 </script>
 
 <template>
   <div>
-    <img
-      :src="avatar"
-      :alt="username"
-      class="rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800"
-    />
+    <Avataaars :accessoriesType="p.avatar.accessoriesType" :circleColor="p.avatar.circleColor"
+      :clotheColor="p.avatar.clotheColor" :clotheType="p.avatar.clotheType" :eyeType="p.avatar.eyeType"
+      :eyebrowType="p.avatar.eyebrowType" :facialHairColor="p.avatar.facialHairColor"
+      :facialHairType="p.avatar.facialHairType" :graphicType="p.avatar.graphicType" :hairColor="p.avatar.hairColor"
+      :isCircle="p.avatar.is_circle" :mouthType="p.avatar.mouthType" :skinColor="p.avatar.skinColor"
+      :topColor="p.avatar.topColor" :topType="p.avatar.topType" class="block h-auto w-full max-w-full">
+    </Avataaars>
     <slot />
   </div>
 </template>

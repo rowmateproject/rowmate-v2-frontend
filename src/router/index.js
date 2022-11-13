@@ -31,6 +31,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Boats",
+    },
+    path: "/boats",
+    name: "boats",
+    component: () => import("@/views/BoatsView.vue"),
+  },
+  {
+    meta: {
       title: "Forms",
     },
     path: "/forms",
@@ -68,6 +76,14 @@ const routes = [
     path: "/login",
     name: "login",
     component: () => import("@/views/LoginView.vue"),
+  },
+  {
+    meta: {
+      title: "Register",
+    },
+    path: "/register",
+    name: "register",
+    component: () => import("@/views/RegisterView.vue"),
   },
   {
     meta: {
