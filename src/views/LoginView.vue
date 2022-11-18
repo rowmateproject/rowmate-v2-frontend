@@ -29,14 +29,14 @@ const submit = () => {
   loginData.append("password", form.pass)
 
   axios.post(`${mainStore.api}/auth/jwt/login`, loginData).then(res => {
-    console.log(res)
-    mainStore.setAccessToken(res.data.access_token);
+    mainStore.setAccessToken("Bearer " + res.data.access_token);
     axios.defaults.baseURL = mainStore.api;
     axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.access_token;
     axios.get(`/users/me`).then(user => {
       mainStore.setUser(user.data)
+    }).then(function () {
+      router.push("/dashboard");
     })
-    router.push("/dashboard");
   })
 
 };

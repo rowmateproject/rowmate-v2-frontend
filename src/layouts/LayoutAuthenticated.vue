@@ -16,7 +16,7 @@ import FooterBar from "@/components/FooterBar.vue";
 const router = useRouter();
 
 const mainStore = useMainStore()
-if (!mainStore.access_token || !mainStore.user) {
+if (mainStore.access_token == null || mainStore.user == null) {
   router.push("/login")
 }
 
@@ -39,7 +39,9 @@ const menuClick = (event, item) => {
   }
 
   if (item.isLogout) {
-    //
+    mainStore.access_token = null
+    mainStore.user = null
+    router.push("/")
   }
 };
 </script>

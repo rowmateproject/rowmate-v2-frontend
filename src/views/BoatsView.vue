@@ -15,7 +15,7 @@ import LineChart from "@/components/Charts/LineChart.vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBox from "@/components/CardBox.vue";
-import TableSampleClients from "@/components/TableSampleClients.vue";
+import BoatsEditTable from "@/components/BoatsEditTable.vue";
 import NotificationBar from "@/components/NotificationBar.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import CardBoxTransaction from "@/components/CardBoxTransaction.vue";
@@ -32,13 +32,16 @@ const fillChartData = () => {
 
 onMounted(() => {
   fillChartData();
+
 });
 
-const mainStore = useMainStore();
 
 const clientBarItems = computed(() => mainStore.clients.slice(0, 4));
 
 const transactionBarItems = computed(() => mainStore.history);
+
+
+
 </script>
 
 <template>
@@ -52,7 +55,7 @@ const transactionBarItems = computed(() => mainStore.history);
       </NotificationBar>
 
       <CardBox has-table>
-        <TableSampleClients />
+        <BoatsEditTable />
       </CardBox>
     </SectionMain>
   </LayoutAuthenticated>

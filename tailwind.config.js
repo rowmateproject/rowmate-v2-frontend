@@ -10,6 +10,9 @@ module.exports = {
       light: "light",
       gray: "gray",
     },
+    fontFamily: {
+      urb: ["Urbanist", "sans-serif"],
+    },
     extend: {
       zIndex: {
         "-1": "-1",
