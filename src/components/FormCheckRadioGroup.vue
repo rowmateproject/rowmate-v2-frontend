@@ -5,7 +5,7 @@ import FormCheckRadio from "@/components/FormCheckRadio.vue";
 const props = defineProps({
   options: {
     type: Object,
-    default: () => {},
+    default: () => { },
   },
   name: {
     type: String,
@@ -38,20 +38,8 @@ const computedValue = computed({
 </script>
 
 <template>
-  <div
-    class="flex justify-start flex-wrap -mb-3"
-    :class="{ 'flex-col': isColumn }"
-  >
-    <FormCheckRadio
-      v-for="(value, key) in options"
-      :key="key"
-      v-model="computedValue"
-      :type="type"
-      :name="name"
-      :input-value="key"
-      :label="value"
-      :class="componentClass"
-      class="mr-6 mb-3 last:mr-0"
-    />
+  <div class="flex justify-start flex-wrap -mb-3" :class="{ 'flex-col': isColumn }">
+    <FormCheckRadio v-for="(value, key) in options" :key="key" v-model="computedValue" :type="type" :name="name"
+      :input-value="key" :label="value" :class="componentClass" class="mr-6 mb-3 last:mr-0 my-3" />
   </div>
 </template>

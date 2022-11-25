@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, reactive, onMounted } from "vue";
+import { computed, ref, reactive, onMounted, watch } from "vue";
 import { useMainStore } from "@/stores/main";
 import { mdiEye, mdiTrashCan } from "@mdi/js";
 import CardBoxModal from "@/components/CardBoxModal.vue";
@@ -27,12 +27,26 @@ axios.defaults.headers.common['Authorization'] = mainStore.access_token;
 const loadBoats = async () => { state.boats = await axios.get("/boats/").then((res) => res.data) }
 
 
-defineProps({
-  checkable: Boolean
+const props = defineProps({
+  checkable: Boolean,
+  reload: {
+    type: Number,
+    default: 0,
+  }
 });
+const rld = computed(() => { //  Watch() not working properly directly with prop
+  return props.reload
+})
+
 
 onMounted(() => {
   loadBoats();
+})
+
+watch(rld, (newValue, oldValue) => {
+  loadBoats()
+}, {
+  deep: true,
 })
 
 const boatDeletedModalState = ref(false);
@@ -155,7 +169,6 @@ const deleteBoat = (boatid) => {
         </td>
         <td class="before:hidden lg:w-1 whitespace-nowrap">
           <BaseButtons type="justify-start lg:justify-end" no-wrap>
-            <BaseButton color="info" :icon="mdiEye" small @click="isModalActive = true" />
             <BaseButton color="danger" :icon="mdiTrashCan" small @click="deleteBoatModal(boat._id, boat.name)" />
           </BaseButtons>
         </td>

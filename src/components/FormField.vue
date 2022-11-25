@@ -30,6 +30,10 @@ const wrapperClass = computed(() => {
     base.push("md:grid-cols-2");
   }
 
+  if (slotsLength === 3) {
+    base.push("md:grid-cols-3");
+  }
+
   return base;
 });
 </script>
@@ -37,7 +41,7 @@ const wrapperClass = computed(() => {
 <template>
   <div class="mb-6 last:mb-0">
     <label v-if="label" :for="labelFor" class="block font-bold mb-2">{{
-      label
+        label
     }}</label>
     <div :class="wrapperClass">
       <slot />

@@ -9,6 +9,8 @@ import {
   mdiReload,
   mdiGithub,
   mdiChartPie,
+  mdiPlusCircle,
+  mdiShipWheel,
 } from "@mdi/js";
 import * as chartConfig from "@/components/Charts/chart.config.js";
 import LineChart from "@/components/Charts/LineChart.vue";
@@ -16,6 +18,7 @@ import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBox from "@/components/CardBox.vue";
 import BoatsEditTable from "@/components/BoatsEditTable.vue";
+import AddBoatForm from "@/components/AddBoatForm.vue";
 import NotificationBar from "@/components/NotificationBar.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import CardBoxTransaction from "@/components/CardBoxTransaction.vue";
@@ -35,7 +38,7 @@ onMounted(() => {
 
 });
 
-
+const reload = ref(0);
 const clientBarItems = computed(() => mainStore.clients.slice(0, 4));
 
 const transactionBarItems = computed(() => mainStore.history);
@@ -48,15 +51,15 @@ const transactionBarItems = computed(() => mainStore.history);
   <LayoutAuthenticated>
     <SectionMain>
 
-      <SectionTitleLineWithButton :icon="mdiAccountMultiple" title="Boats" main />
-
-      <NotificationBar color="info" :icon="mdiMonitorCellphone">
-        <b>Responsive table.</b> Collapses on mobile
-      </NotificationBar>
+      <SectionTitleLineWithButton :icon="mdiShipWheel" title="Boats" main />
 
       <CardBox has-table>
-        <BoatsEditTable />
+        <BoatsEditTable :reload="reload" />
+
       </CardBox>
+      <div class="py-8"></div>
+      <SectionTitleLineWithButton :icon="mdiPlusCircle" title="Add Boat" main />
+      <AddBoatForm v-on:reload="reload++" />
     </SectionMain>
   </LayoutAuthenticated>
 </template>
