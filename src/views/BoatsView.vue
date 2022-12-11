@@ -2,13 +2,6 @@
 import { computed, ref, onMounted } from "vue";
 import { useMainStore } from "@/stores/main";
 import {
-  mdiAccountMultiple,
-  mdiCartOutline,
-  mdiChartTimelineVariant,
-  mdiMonitorCellphone,
-  mdiReload,
-  mdiGithub,
-  mdiChartPie,
   mdiPlusCircle,
   mdiShipWheel,
 } from "@mdi/js";

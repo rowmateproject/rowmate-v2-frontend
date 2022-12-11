@@ -2,6 +2,7 @@ import {
   mdiAccountCircle,
   mdiMonitor,
   mdiGithub,
+  mdiShipWheel,
   mdiLock,
   mdiAlertCircle,
   mdiSquareEditOutline,
@@ -11,6 +12,8 @@ import {
   mdiResponsive,
   mdiPalette,
   mdiReact,
+  mdiFerry,
+  mdiAccountGroup,
 } from "@mdi/js";
 
 export default [
@@ -23,7 +26,13 @@ export default [
   {
     to: "/boats",
     label: "Boats",
-    icon: mdiTable,
+    icon: mdiFerry,
+    role: "Admin"
+  },
+  {
+    to: "/users",
+    label: "Users",
+    icon: mdiAccountGroup,
     role: "Admin"
   },
   {

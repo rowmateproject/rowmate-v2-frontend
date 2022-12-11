@@ -39,6 +39,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Users",
+    },
+    path: "/users",
+    name: "users",
+    component: () => import("@/views/UsersView.vue"),
+  },
+  {
+    meta: {
       title: "Forms",
     },
     path: "/forms",
@@ -84,6 +92,14 @@ const routes = [
     path: "/register",
     name: "register",
     component: () => import("@/views/RegisterView.vue"),
+  },
+  {
+    meta: {
+      title: "Verify",
+    },
+    path: "/verify",
+    name: "verify",
+    component: () => import("@/views/VerifyView.vue"),
   },
   {
     meta: {
