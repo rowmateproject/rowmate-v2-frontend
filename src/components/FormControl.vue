@@ -48,6 +48,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  selected: {
+    type: String,
+    default: "",
+  },
   modelValue: {
     type: [String, Number, Boolean, Array, Object],
     default: "",
@@ -139,6 +143,7 @@ if (props.ctrlKFocus) {
       <option v-for="option in options" :key="option.id ?? option" :value="option">
         {{ option.label ?? option }}
       </option>
+
     </select>
     <textarea v-else-if="computedType === 'textarea'" :id="id" v-model="computedValue" :class="inputElClass"
       :name="name" :placeholder="placeholder" :required="required" />

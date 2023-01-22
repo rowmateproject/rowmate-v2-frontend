@@ -5,6 +5,7 @@ export const useMainStore = defineStore("main", {
   state: () => ({
     api: "http://127.0.0.1:8000",
     access_token: null,
+    lang: "de-CH",
     /* User */
     user: {
       firstname: "Loading",
@@ -14,7 +15,7 @@ export const useMainStore = defineStore("main", {
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
 
-    /* Sample data (commonly used) */
+    config: {},
     clients: [],
     history: [],
   }),
@@ -23,6 +24,18 @@ export const useMainStore = defineStore("main", {
       if (payload) {
         this.user = payload;
       }
+    },
+    fetchConfig() {
+      axios
+        .get(`${this.api}/config/`)
+        .then((r) => {
+          if (r.data) {
+            this.config = r.data;
+          }
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     },
     setAccessToken(token) {
       if (token) {
