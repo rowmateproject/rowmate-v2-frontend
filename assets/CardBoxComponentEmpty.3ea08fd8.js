@@ -1,0 +1,1 @@
+import{n as e,o as t,p as o,h as s}from"./index.45972e7f.js";const n={},c={class:"text-center py-24 text-gray-500 dark:text-slate-400"},r=s("p",null,"Nothing's here\u2026",-1),a=[r];function _(d,p){return t(),o("div",c,a)}const h=e(n,[["render",_]]);export{h as C};
