@@ -61,11 +61,25 @@ watchEffect(() => {
 })
 
 const submit = () => {
-  var loginData = new FormData();
-  loginData.append("username", form.login)
-  loginData.append("password", form.pass)
+  var registerData = {
+    email: form.email,
+    avatar: avatar,
+    password: form.password,
+    yob: form.yob,
+    lang: form.lang,
+    firstname: form.firstname,
+    lastname: form.lastname,
+    is_active: false,
+    is_superuser: false,
+    is_verified: false,
+    is_accepted: false,
+    is_email_verified: false,
+    roles: [
+      "User"
+    ]
+  }
 
-  axios.post(`${mainStore.api}/auth/jwt/login`, loginData).then(res => {
+  axios.post(`${mainStore.api}/auth/register`, registerData).then(res => {
     mainStore.setAccessToken("Bearer " + res.data.access_token);
     axios.defaults.baseURL = mainStore.api;
     axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.access_token;
