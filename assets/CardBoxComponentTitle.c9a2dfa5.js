@@ -1,0 +1,1 @@
+import{o as s,p as o,h as r,D as a,Q as n}from"./index.93260499.js";const i={class:"flex items-center justify-between mb-3"},l={class:"text-2xl"},_={__name:"CardBoxComponentTitle",props:{title:{type:String,required:!0}},setup(e){return(t,c)=>(s(),o("div",i,[r("h1",l,a(e.title),1),n(t.$slots,"default")]))}};export{_};
