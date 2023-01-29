@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, watchEffect, watch } from "vue";
+import { reactive, watchEffect, ref } from "vue";
 import { useMainStore } from "@/stores/main";
 import { useRouter } from "vue-router";
 import { mdiAccount, mdiAsterisk, mdiAxisLock } from "@mdi/js";
@@ -14,12 +14,14 @@ import NotificationBar from "@/components/NotificationBar.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import BaseDivider from "@/components/BaseDivider.vue";
-import SectionTitle from "@/components/SectionTitle.vue";
+import EditAvatar from "@/components/EditAvatar.vue";
 
 import axios from "axios";
 
 const mainStore = useMainStore();
 mainStore.fetchConfig()
+
+const isModalActive = ref(false);
 
 const avatar = reactive({
   is_circle: true,
@@ -27,7 +29,7 @@ const avatar = reactive({
   accessoriesType: "Blank",
   hairColor: "Black",
   facialHairType: "Blank",
-  clotheType: "BlazerShirt",
+  clotheType: "Hoodie",
   eyeType: "Default",
   eyebrowType: "Default",
   mouthType: "Default",
@@ -93,60 +95,63 @@ const submit = () => {
 <template>
   <LayoutGuest>
     <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
+      <EditAvatar v-model="isModalActive" title="Sample modal" :avatar="avatar" />
+
       <CardBox :class="cardClass" is-form @submit.prevent="submit">
         <NotificationBar v-for="error, id in errors.errors" v-on:deleted="errors.errors.splice(id, 1)"
           :key="errors.errors" :color="'danger'">{{
-              error
+            error
           }}
         </NotificationBar>
-        <h2 class="text-center text-3xl">Register</h2>
+        <h2 class="text-center text-3xl">{{ $t('account.register') }}</h2>
         <div class="flex items-center justify-center w-full">
           <UserAvatar :avatar="avatar" />
 
         </div>
         <div class="flex items-center justify-center w-full p-4">
-          <BaseButton type="submit" color="info" label="Change Avatar" />
+          <BaseButton color="info" label="Change Avatar" @click="isModalActive = true"
+            v-on:close="isModalActive = false" />
         </div>
 
 
         <BaseDivider />
         <FormField>
-          <FormField label="Vorname" help="Please enter your first name">
+          <FormField :label="$t('account.firstName')" help="Please enter your first name">
             <FormControl v-model="form.firstname" :icon="mdiAccount" name="login" autocomplete="firstname" />
           </FormField>
-          <FormField label="Nachname" help="Please enter your last name">
+          <FormField :label="$t('account.lastName')" help="Please enter your last name">
             <FormControl v-model="form.lastname" :icon="mdiAccount" name="login" autocomplete="lastname" />
           </FormField>
         </FormField>
 
-        <FormField label="E-Mail" help="Please enter your E-Mail-Address">
+        <FormField :label="$t('account.email')" help="Please enter your E-Mail-Address">
           <FormControl v-model="form.email" :icon="mdiAccount" name="login" autocomplete="username" />
         </FormField>
 
-        <FormField label="Password" help="Please enter your password">
+        <FormField :label="$t('account.password')" help="Please enter your password">
           <FormControl v-model="form.password" :icon="mdiAsterisk" type="password" name="password" :class="''"
             autocomplete="current-password" />
         </FormField>
 
-        <FormField label="Confirm Password" help="Please enter your password">
+        <FormField :label="$t('account.confirmPassword')" help="Please enter your password">
           <FormControl v-model="form.password2" :icon="mdiAsterisk" type="password" name="password" :class="''"
             autocomplete="current-password" />
         </FormField>
 
 
         <FormField>
-          <FormField label="Year" help="Please enter your year of birth">
+          <FormField :label="$t('account.yob')" help="Please enter your year of birth">
             <FormControl v-model="form.yob" :type="'number'" :icon="mdiAccount" name="login" autocomplete="username" />
           </FormField>
-          <FormField label="Language">
+          <FormField :label="$t('account.language')">
             <FormControl v-model="form.lang" :options="mainStore.config.langs" />
           </FormField>
         </FormField>
 
         <template #footer>
           <BaseButtons>
-            <BaseButton type="submit" color="info" label="Login" />
-            <BaseButton to="/dashboard" color="info" outline label="Back" />
+            <BaseButton type="submit" color="info" label="Register" />
+            <BaseButton to="/dashboard" color="info" outline :label="$t('account.register')" />
           </BaseButtons>
         </template>
       </CardBox>

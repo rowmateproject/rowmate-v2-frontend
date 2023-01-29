@@ -1,3 +1,25 @@
 {
-    "hello": "Hallo"
+    "hello": "Hallo",
+    "avatar": {
+        "clothes": "Kleidung",
+        "top": "Kopfbedeckung",
+        "accessories": "Zubehör",
+        "hairColor": "Haarfarbe",
+        "facialHair": "Gesichtsbehaarung",
+        "eyes": "Augen",
+        "eyebrows": "Augenbrauen",
+        "mouths": "Mund",
+        "skins": "Hautfarbe",
+        "graphic": "Bild"
+    },
+    "account": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "E-Mail",
+        "yob": "Jahrgang",
+        "password": "Passwort",
+        "confirmPassword": "Passwort bestätigen",
+        "register": "Registrieren",
+        "language": "Sprache"
+    }
 }
